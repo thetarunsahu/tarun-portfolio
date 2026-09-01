@@ -1,221 +1,361 @@
 "use client";
 
-import { ArrowUpRight } from "lucide-react";
+import { motion } from "framer-motion";
+import { ArrowDown, ArrowUpRight, Github, Linkedin } from "lucide-react";
+
+const projects = [
+  {
+    number: "01",
+    title: "JARVIS OS",
+    category: "PERSONAL AI OPERATING ENVIRONMENT",
+    status: "ALPHA",
+    description:
+      "A voice-first personal AI system built around specialized agents, memory, tool routing and real computer-level actions.",
+    stack: ["Python", "AI Agents", "LLMs", "Tool Routing"],
+    href: "https://github.com/thetarunsahu/Jarvis-OS",
+  },
+  {
+    number: "02",
+    title: "AGRIBOT",
+    category: "AI × AGRICULTURAL ROBOTICS",
+    status: "IN DEVELOPMENT",
+    description:
+      "An autonomous agricultural rover for crop-safe weed detection, selective mechanical removal and field analytics.",
+    stack: ["Computer Vision", "Robotics", "ESP32", "Embedded"],
+    href: "https://github.com/thetarunsahu/smart-precision-weeding-robot",
+  },
+  {
+    number: "03",
+    title: "FRESHFUSION",
+    category: "AI × IOT",
+    status: "PROTOTYPE",
+    description:
+      "A non-destructive fruit freshness system combining computer vision, environmental sensing and real-time IoT data.",
+    stack: ["ESP32", "IoT", "Computer Vision", "Sensors"],
+    href: "https://github.com/thetarunsahu/Fresh-Fusion-",
+  },
+  {
+    number: "04",
+    title: "SMART SAFETY WRISTBAND",
+    category: "CONNECTED SAFETY SYSTEM",
+    status: "PROTOTYPE",
+    description:
+      "A connected wearable concept combining emergency workflows, sensors, location sharing and a software response layer.",
+    stack: ["ESP32", "IoT", "Sensors", "Connected Systems"],
+    href: "https://github.com/thetarunsahu/Smart-Safety-Wristband",
+  },
+];
+
+const stackGroups = [
+  {
+    number: "01",
+    title: "Languages",
+    items: ["Java", "C++", "Python", "SQL"],
+  },
+  {
+    number: "02",
+    title: "Software",
+    items: ["Backend", "APIs", "Databases", "Git", "Linux"],
+  },
+  {
+    number: "03",
+    title: "Intelligence",
+    items: ["AI Systems", "Computer Vision", "LLMs", "AI Agents"],
+  },
+  {
+    number: "04",
+    title: "Hardware",
+    items: ["ESP32", "IoT", "Sensors", "Embedded Systems"],
+  },
+];
+
+const reveal = {
+  initial: { opacity: 0, y: 30 },
+  whileInView: { opacity: 1, y: 0 },
+  viewport: { once: true, amount: 0.2 },
+  transition: { duration: 0.7, ease: [0.22, 1, 0.36, 1] as const },
+};
 
 export default function Home() {
   return (
     <main>
-      {/* NAVBAR */}
-      <nav className="navbar">
-        <div className="logo">TS.</div>
+      <header className="site-header">
+        <a className="brand" href="#top" aria-label="Back to top">
+          <span>TS</span>
+          <small>/26</small>
+        </a>
 
-        <div className="nav-links">
+        <nav className="nav-links" aria-label="Primary navigation">
           <a href="#about">About</a>
           <a href="#projects">Projects</a>
-          <a href="#skills">Skills</a>
+          <a href="#stack">Stack</a>
           <a href="#contact">Contact</a>
-        </div>
+        </nav>
 
         <a
+          className="external-link header-github"
           href="https://github.com/thetarunsahu"
           target="_blank"
-          className="nav-github"
+          rel="noreferrer"
         >
-          GitHub <ArrowUpRight size={15} />
+          GitHub <ArrowUpRight size={14} strokeWidth={1.7} />
         </a>
-      </nav>
+      </header>
 
-      {/* HERO */}
-      <section className="hero">
-        <div className="hero-meta">
+      <section className="hero" id="top">
+        <div className="hero-grid-lines" aria-hidden="true" />
+        <div className="hero-orb" aria-hidden="true" />
+
+        <div className="hero-topline">
           <span>PORTFOLIO / 2026</span>
-          <span>PUNE, INDIA</span>
+          <span>SOFTWARE · AI · SYSTEMS</span>
+          <span>INDIA</span>
         </div>
 
-        <div className="hero-content">
-          <p className="hero-label">SOFTWARE ENGINEER</p>
+        <div className="hero-main">
+          <motion.p
+            className="eyebrow"
+            initial={{ opacity: 0, y: 15 }}
+            animate={{ opacity: 1, y: 0 }}
+            transition={{ delay: 0.15, duration: 0.6 }}
+          >
+            SOFTWARE ENGINEER · AI &amp; BACKEND DEVELOPER
+          </motion.p>
 
-          <h1>
-            TARUN
-            <span>KUMAR SAHU</span>
+          <h1 className="hero-title" aria-label="Tarun Kumar Sahu">
+            <motion.span
+              initial={{ opacity: 0, y: 70 }}
+              animate={{ opacity: 1, y: 0 }}
+              transition={{ delay: 0.05, duration: 0.9, ease: [0.22, 1, 0.36, 1] }}
+            >
+              TARUN
+            </motion.span>
+            <motion.em
+              initial={{ opacity: 0, y: 70 }}
+              animate={{ opacity: 1, y: 0 }}
+              transition={{ delay: 0.14, duration: 0.9, ease: [0.22, 1, 0.36, 1] }}
+            >
+              KUMAR SAHU
+            </motion.em>
           </h1>
 
-          <div className="hero-bottom">
-            <p className="hero-description">
+          <div className="hero-lower">
+            <motion.p
+              className="hero-statement"
+              initial={{ opacity: 0, y: 20 }}
+              animate={{ opacity: 1, y: 0 }}
+              transition={{ delay: 0.45, duration: 0.7 }}
+            >
               Building intelligent software, AI systems and connected hardware
-              that move ideas beyond the screen.
-            </p>
+              that move ideas <i>beyond the screen.</i>
+            </motion.p>
 
-            <div className="hero-roles">
-              <span>AI</span>
-              <span>BACKEND</span>
-              <span>ROBOTICS</span>
-              <span>IoT</span>
-            </div>
+            <motion.div
+              className="current-build"
+              initial={{ opacity: 0 }}
+              animate={{ opacity: 1 }}
+              transition={{ delay: 0.65, duration: 0.7 }}
+            >
+              <div className="status-line">
+                <span className="status-dot" />
+                CURRENTLY BUILDING
+              </div>
+              <strong>JARVIS OS</strong>
+              <p>Personal AI operating environment</p>
+            </motion.div>
           </div>
         </div>
 
-        <div className="scroll-indicator">
-          <span>SCROLL TO EXPLORE</span>
-          <div className="scroll-line" />
+        <div className="hero-footer">
+          <div className="hero-tags">
+            <span>AI</span>
+            <span>BACKEND</span>
+            <span>ROBOTICS</span>
+            <span>IoT</span>
+          </div>
+
+          <a className="scroll-cue" href="#about">
+            <span>SCROLL TO EXPLORE</span>
+            <ArrowDown size={17} strokeWidth={1.4} />
+          </a>
         </div>
       </section>
 
-      {/* ABOUT */}
-      <section className="section" id="about">
-        <div className="section-number">001</div>
+      <section className="editorial-section about-section" id="about">
+        <motion.div className="section-index" {...reveal}>
+          <span>001</span>
+          <span>ABOUT</span>
+        </motion.div>
 
-        <div className="section-content">
-          <p className="section-label">ABOUT</p>
-
-          <h2>
+        <div className="section-body">
+          <motion.h2 className="display-heading" {...reveal}>
             I build systems,
-            <span>not just interfaces.</span>
-          </h2>
+            <em>not just interfaces.</em>
+          </motion.h2>
 
-          <p className="large-copy">
-            I&apos;m a Computer Science Engineering student focused on
-            software engineering, artificial intelligence, backend systems,
-            computer vision and embedded technology.
-          </p>
+          <motion.div className="about-copy-grid" {...reveal}>
+            <p className="about-lead">
+              I&apos;m a Computer Science Engineering student exploring how
+              software, intelligence and hardware can work as one connected
+              system.
+            </p>
+            <div className="about-detail">
+              <p>
+                My work currently lives at the intersection of backend
+                engineering, applied AI, computer vision, embedded systems and
+                product experimentation.
+              </p>
+              <p>
+                The goal is simple: understand the architecture deeply enough
+                to turn ambitious ideas into working, explainable prototypes.
+              </p>
+            </div>
+          </motion.div>
+
+          <motion.div className="education-strip" {...reveal}>
+            <span>EDUCATION</span>
+            <strong>B.Tech · Computer Science &amp; Engineering</strong>
+            <span>MIT ADT University · Class of 2029</span>
+          </motion.div>
         </div>
       </section>
 
-      {/* PROJECTS */}
       <section className="projects-section" id="projects">
-        <div className="section-number">002</div>
+        <motion.div className="section-index section-index-light" {...reveal}>
+          <span>002</span>
+          <span>SELECTED SYSTEMS</span>
+        </motion.div>
 
-        <div className="section-content">
-          <p className="section-label">SELECTED SYSTEMS</p>
+        <div className="section-body">
+          <motion.div className="project-heading-row" {...reveal}>
+            <h2 className="display-heading light-heading">
+              Work in
+              <em>motion.</em>
+            </h2>
+            <p>
+              Major systems I&apos;m actively building, testing or evolving.
+            </p>
+          </motion.div>
 
-          <h2>
-            Work in
-            <span>motion.</span>
-          </h2>
+          <div className="project-ledger">
+            {projects.map((project, index) => (
+              <motion.a
+                key={project.number}
+                className="project-row"
+                href={project.href}
+                target="_blank"
+                rel="noreferrer"
+                initial={{ opacity: 0, y: 25 }}
+                whileInView={{ opacity: 1, y: 0 }}
+                viewport={{ once: true, amount: 0.25 }}
+                transition={{
+                  delay: index * 0.06,
+                  duration: 0.65,
+                  ease: [0.22, 1, 0.36, 1],
+                }}
+              >
+                <span className="project-number">{project.number}</span>
 
-          <div className="project-list">
-            <Project
-              number="01"
-              category="PERSONAL AI SYSTEM"
-              title="JARVIS OS"
-              status="ALPHA"
-            />
+                <div className="project-title-block">
+                  <small>{project.category}</small>
+                  <h3>{project.title}</h3>
+                </div>
 
-            <Project
-              number="02"
-              category="AI × AGRICULTURAL ROBOTICS"
-              title="AGRIBOT"
-              status="IN DEVELOPMENT"
-            />
+                <p className="project-description">{project.description}</p>
 
-            <Project
-              number="03"
-              category="AI × IoT"
-              title="FRESHFUSION"
-              status="PROTOTYPE"
-            />
+                <div className="project-meta">
+                  <span>{project.status}</span>
+                  <div className="project-stack">
+                    {project.stack.map((item) => (
+                      <small key={item}>{item}</small>
+                    ))}
+                  </div>
+                </div>
 
-            <Project
-              number="04"
-              category="CONNECTED SAFETY SYSTEM"
-              title="SMART SAFETY WRISTBAND"
-              status="PROTOTYPE"
-            />
+                <ArrowUpRight className="project-arrow" strokeWidth={1.2} />
+              </motion.a>
+            ))}
           </div>
         </div>
       </section>
 
-      {/* SKILLS */}
-      <section className="section dark-section" id="skills">
-        <div className="section-number">003</div>
+      <section className="editorial-section stack-section" id="stack">
+        <motion.div className="section-index" {...reveal}>
+          <span>003</span>
+          <span>ENGINEERING STACK</span>
+        </motion.div>
 
-        <div className="section-content">
-          <p className="section-label">ENGINEERING STACK</p>
-
-          <h2>
+        <div className="section-body">
+          <motion.h2 className="display-heading" {...reveal}>
             Where code
-            <span>meets hardware.</span>
-          </h2>
+            <em>meets hardware.</em>
+          </motion.h2>
 
-          <div className="skills-grid">
-            <Skill title="Languages" items="Java · C++ · Python · SQL" />
-
-            <Skill
-              title="Software"
-              items="Backend · APIs · Databases · Git · Linux"
-            />
-
-            <Skill
-              title="Intelligence"
-              items="AI · Computer Vision · LLM Systems"
-            />
-
-            <Skill
-              title="Hardware"
-              items="ESP32 · IoT · Sensors · Embedded Systems"
-            />
+          <div className="stack-grid">
+            {stackGroups.map((group, index) => (
+              <motion.article
+                className="stack-card"
+                key={group.number}
+                initial={{ opacity: 0, y: 25 }}
+                whileInView={{ opacity: 1, y: 0 }}
+                viewport={{ once: true, amount: 0.3 }}
+                transition={{ delay: index * 0.08, duration: 0.6 }}
+              >
+                <div className="stack-card-head">
+                  <span>{group.number}</span>
+                  <p>{group.title}</p>
+                </div>
+                <h3>{group.items.join(" · ")}</h3>
+              </motion.article>
+            ))}
           </div>
         </div>
       </section>
 
-      {/* CONTACT */}
       <section className="contact-section" id="contact">
-        <p className="section-label">004 / OPEN CHANNEL</p>
+        <motion.div className="contact-kicker" {...reveal}>
+          <span>004</span>
+          <span>OPEN CHANNEL</span>
+        </motion.div>
 
-        <h2>
+        <motion.h2 {...reveal}>
           LET&apos;S BUILD
-          <span>SOMETHING AMBITIOUS.</span>
-        </h2>
+          <em>SOMETHING AMBITIOUS.</em>
+        </motion.h2>
 
-        <div className="contact-links">
-          <a href="https://github.com/thetarunsahu" target="_blank">
-            GITHUB <ArrowUpRight />
-          </a>
+        <motion.div className="contact-bottom" {...reveal}>
+          <p>
+            Open to collaborations, technical conversations and interesting
+            engineering problems.
+          </p>
 
-          <a
-            href="https://www.linkedin.com/in/tarunnsahuu/"
-            target="_blank"
-          >
-            LINKEDIN <ArrowUpRight />
-          </a>
+          <div className="contact-links">
+            <a
+              href="https://github.com/thetarunsahu"
+              target="_blank"
+              rel="noreferrer"
+            >
+              <Github size={18} strokeWidth={1.5} />
+              GITHUB
+              <ArrowUpRight size={15} />
+            </a>
+            <a
+              href="https://www.linkedin.com/in/tarunnsahuu/"
+              target="_blank"
+              rel="noreferrer"
+            >
+              <Linkedin size={18} strokeWidth={1.5} />
+              LINKEDIN
+              <ArrowUpRight size={15} />
+            </a>
+          </div>
+        </motion.div>
+
+        <div className="site-footer">
+          <span>© 2026 TARUN KUMAR SAHU</span>
+          <span>DESIGNED AS A LIVING SYSTEM</span>
         </div>
       </section>
     </main>
-  );
-}
-
-function Project({
-  number,
-  category,
-  title,
-  status,
-}: {
-  number: string;
-  category: string;
-  title: string;
-  status: string;
-}) {
-  return (
-    <article className="project-row">
-      <span className="project-number">{number}</span>
-
-      <div>
-        <p>{category}</p>
-        <h3>{title}</h3>
-      </div>
-
-      <span className="project-status">{status}</span>
-
-      <ArrowUpRight className="project-arrow" />
-    </article>
-  );
-}
-
-function Skill({ title, items }: { title: string; items: string }) {
-  return (
-    <div className="skill-card">
-      <p>{title}</p>
-      <h3>{items}</h3>
-    </div>
   );
 }
