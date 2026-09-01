@@ -16,8 +16,8 @@ const projects = [
   },
   {
     number: "02",
-    title: "AGRIBOT",
-    category: "AI × AGRICULTURAL ROBOTICS",
+    title: "WEED REMOVAL ROBOT",
+    category: "AI × PRECISION AGRICULTURAL ROBOTICS",
     status: "IN DEVELOPMENT",
     description:
       "An autonomous agricultural rover for crop-safe weed detection, selective mechanical removal and field analytics.",
