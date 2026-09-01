@@ -5,7 +5,7 @@ import { profile } from "@/data/portfolio";
 
 const items = [
   ["INDEX", "/"],
-  ["WORK", "/#projects"],
+  ["WORK", "/work"],
   ["LAB", "/lab"],
   ["ABOUT", "/about"],
 ];
