@@ -1,7 +1,7 @@
 "use client";
 
 import { motion } from "framer-motion";
-import { ArrowDown, ArrowUpRight, Github, Linkedin } from "lucide-react";
+import { ArrowDown, ArrowUpRight } from "lucide-react";
 
 const projects = [
   {
@@ -335,7 +335,7 @@ export default function Home() {
               target="_blank"
               rel="noreferrer"
             >
-              <Github size={18} strokeWidth={1.5} />
+              <span aria-hidden="true">GH</span>
               GITHUB
               <ArrowUpRight size={15} />
             </a>
@@ -344,7 +344,7 @@ export default function Home() {
               target="_blank"
               rel="noreferrer"
             >
-              <Linkedin size={18} strokeWidth={1.5} />
+              <span aria-hidden="true">IN</span>
               LINKEDIN
               <ArrowUpRight size={15} />
             </a>
