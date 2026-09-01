@@ -4,6 +4,7 @@ import { motion } from "framer-motion";
 import { ArrowDown, ArrowUpRight } from "lucide-react";
 import { CustomCursor } from "@/components/CustomCursor";
 import { IntroLoader } from "@/components/IntroLoader";
+import { MediaFrame } from "@/components/MediaFrame";
 import { SiteNav } from "@/components/SiteNav";
 import { now, profile, projects, stackGroups } from "@/data/portfolio";
 
@@ -141,6 +142,25 @@ export default function Home() {
         </motion.div>
       </section>
 
+      <section className="identity-interlude" aria-label="Identity portrait">
+        <div className="identity-interlude__head">
+          <span>02 / IDENTITY</span>
+          <motion.h2 {...reveal}>
+            ENGINEERING
+            <em>with a point of view.</em>
+          </motion.h2>
+        </div>
+
+        <MediaFrame
+          src="/media/tarun-sunglasses.webp"
+          index="FRAME 01"
+          label="IDENTITY / EDITORIAL"
+          caption="A deliberate portrait break between the system manifesto and the person building it."
+          className="media-frame--identity"
+          cursor="LOOK"
+        />
+      </section>
+
       <section className="editorial-section about-section" id="about">
         <motion.div className="section-index" {...reveal}>
           <span>002</span>
@@ -240,6 +260,29 @@ export default function Home() {
         </div>
       </section>
 
+      <section className="motion-interlude" aria-label="In motion portrait">
+        <MediaFrame
+          src="/media/tarun-crosswalk.webp"
+          index="FRAME 02"
+          label="IN MOTION"
+          caption="A visual bridge from shipped work into the current process — movement, experimentation and unfinished systems."
+          className="media-frame--motion"
+          cursor="LOOK"
+        />
+
+        <motion.div className="motion-interlude__copy" {...reveal}>
+          <span>PROCESS / 2026</span>
+          <h2>
+            STILL
+            <em>building.</em>
+          </h2>
+          <p>
+            The portfolio is not an archive of finished objects. It is a record
+            of systems moving from idea to architecture to prototype.
+          </p>
+        </motion.div>
+      </section>
+
       <section className="now-section">
         <motion.div className="now-heading" {...reveal}>
           <span>004</span>
@@ -275,6 +318,26 @@ export default function Home() {
             <p>SMALL EXPERIMENTS · STRANGE IDEAS · THINGS BUILT TO LEARN</p>
             <h2>THE LAB</h2>
           </motion.div>
+
+          <div className="lab-creative-stage">
+            <div className="lab-creative-stage__copy">
+              <span>CREATIVE PROCESS</span>
+              <h3>Not everything needs to become a product.</h3>
+              <p>
+                Some experiments exist to learn a sensor, test an interaction,
+                understand a visual system or simply make an idea tangible.
+              </p>
+            </div>
+
+            <MediaFrame
+              src="/media/lab-focus.webp"
+              index="FRAME 03"
+              label="CREATIVE SELF-STUDY"
+              caption="A deliberately playful image reserved for the Lab, where experimentation is the point."
+              className="media-frame--lab"
+              cursor="EXPLORE"
+            />
+          </div>
 
           <div className="lab-ledger">
             {labItems.map(([number, title, meta], index) => (
