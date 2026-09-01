@@ -4,16 +4,16 @@ import { ArrowUpRight } from "lucide-react";
 import { profile } from "@/data/portfolio";
 
 const items = [
-  ["INDEX", "#top"],
-  ["WORK", "#projects"],
-  ["LAB", "#lab"],
-  ["ABOUT", "#about"],
+  ["INDEX", "/"],
+  ["WORK", "/#projects"],
+  ["LAB", "/lab"],
+  ["ABOUT", "/about"],
 ];
 
 export function SiteNav() {
   return (
     <header className="site-nav">
-      <a className="site-nav__brand" href="#top" aria-label="Back to top">
+      <a className="site-nav__brand" href="/" aria-label="Back to index">
         TS<span>/26</span>
       </a>
 
