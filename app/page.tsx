@@ -2,188 +2,148 @@
 
 import { motion } from "framer-motion";
 import { ArrowDown, ArrowUpRight } from "lucide-react";
-
-const projects = [
-  {
-    number: "01",
-    title: "JARVIS OS",
-    category: "PERSONAL AI OPERATING ENVIRONMENT",
-    status: "ALPHA",
-    description:
-      "A voice-first personal AI system built around specialized agents, memory, tool routing and real computer-level actions.",
-    stack: ["Python", "AI Agents", "LLMs", "Tool Routing"],
-    href: "https://github.com/thetarunsahu/Jarvis-OS",
-  },
-  {
-    number: "02",
-    title: "WEED REMOVAL ROBOT",
-    category: "AI × PRECISION AGRICULTURAL ROBOTICS",
-    status: "IN DEVELOPMENT",
-    description:
-      "An autonomous agricultural rover for crop-safe weed detection, selective mechanical removal and field analytics.",
-    stack: ["Computer Vision", "Robotics", "ESP32", "Embedded"],
-    href: "https://github.com/thetarunsahu/smart-precision-weeding-robot",
-  },
-  {
-    number: "03",
-    title: "FRESHFUSION",
-    category: "AI × IOT",
-    status: "PROTOTYPE",
-    description:
-      "A non-destructive fruit freshness system combining computer vision, environmental sensing and real-time IoT data.",
-    stack: ["ESP32", "IoT", "Computer Vision", "Sensors"],
-    href: "https://github.com/thetarunsahu/Fresh-Fusion-",
-  },
-  {
-    number: "04",
-    title: "SMART SAFETY WRISTBAND",
-    category: "CONNECTED SAFETY SYSTEM",
-    status: "PROTOTYPE",
-    description:
-      "A connected wearable concept combining emergency workflows, sensors, location sharing and a software response layer.",
-    stack: ["ESP32", "IoT", "Sensors", "Connected Systems"],
-    href: "https://github.com/thetarunsahu/Smart-Safety-Wristband",
-  },
-];
-
-const stackGroups = [
-  {
-    number: "01",
-    title: "Languages",
-    items: ["Java", "C++", "Python", "SQL"],
-  },
-  {
-    number: "02",
-    title: "Software",
-    items: ["Backend", "APIs", "Databases", "Git", "Linux"],
-  },
-  {
-    number: "03",
-    title: "Intelligence",
-    items: ["AI Systems", "Computer Vision", "LLMs", "AI Agents"],
-  },
-  {
-    number: "04",
-    title: "Hardware",
-    items: ["ESP32", "IoT", "Sensors", "Embedded Systems"],
-  },
-];
+import { CustomCursor } from "@/components/CustomCursor";
+import { IntroLoader } from "@/components/IntroLoader";
+import { SiteNav } from "@/components/SiteNav";
+import { now, profile, projects, stackGroups } from "@/data/portfolio";
 
 const reveal = {
-  initial: { opacity: 0, y: 30 },
+  initial: { opacity: 0, y: 32 },
   whileInView: { opacity: 1, y: 0 },
   viewport: { once: true, amount: 0.2 },
-  transition: { duration: 0.7, ease: [0.22, 1, 0.36, 1] as const },
+  transition: { duration: 0.72, ease: [0.22, 1, 0.36, 1] as const },
 };
+
+const labItems = [
+  ["01", "MOTION CONTROLLER", "WEARABLE / IMU / ESP32"],
+  ["02", "PLAY WITH YOUR MIND", "COMPUTER VISION"],
+  ["03", "RAMADAN PEN", "MOTION INTERACTION"],
+  ["04", "EMBEDDED LAB", "ESP32 / SENSORS / PROTOTYPES"],
+];
 
 export default function Home() {
   return (
     <main>
-      <header className="site-header">
-        <a className="brand" href="#top" aria-label="Back to top">
-          <span>TS</span>
-          <small>/26</small>
-        </a>
+      <IntroLoader />
+      <CustomCursor />
+      <SiteNav />
 
-        <nav className="nav-links" aria-label="Primary navigation">
-          <a href="#about">About</a>
-          <a href="#projects">Projects</a>
-          <a href="#stack">Stack</a>
-          <a href="#contact">Contact</a>
-        </nav>
-
-        <a
-          className="external-link header-github"
-          href="https://github.com/thetarunsahu"
-          target="_blank"
-          rel="noreferrer"
-        >
-          GitHub <ArrowUpRight size={14} strokeWidth={1.7} />
-        </a>
-      </header>
-
-      <section className="hero" id="top">
+      <section className="hero hero-v2" id="top">
         <div className="hero-grid-lines" aria-hidden="true" />
-        <div className="hero-orb" aria-hidden="true" />
 
         <div className="hero-topline">
           <span>PORTFOLIO / 2026</span>
           <span>SOFTWARE · AI · SYSTEMS</span>
-          <span>INDIA</span>
+          <span>{profile.location}</span>
         </div>
 
-        <div className="hero-main">
-          <motion.p
-            className="eyebrow"
-            initial={{ opacity: 0, y: 15 }}
-            animate={{ opacity: 1, y: 0 }}
-            transition={{ delay: 0.15, duration: 0.6 }}
-          >
-            SOFTWARE ENGINEER · AI &amp; BACKEND DEVELOPER
-          </motion.p>
-
-          <h1 className="hero-title" aria-label="Tarun Kumar Sahu">
-            <motion.span
-              initial={{ opacity: 0, y: 70 }}
-              animate={{ opacity: 1, y: 0 }}
-              transition={{ delay: 0.05, duration: 0.9, ease: [0.22, 1, 0.36, 1] }}
-            >
-              TARUN
-            </motion.span>
-            <motion.em
-              initial={{ opacity: 0, y: 70 }}
-              animate={{ opacity: 1, y: 0 }}
-              transition={{ delay: 0.14, duration: 0.9, ease: [0.22, 1, 0.36, 1] }}
-            >
-              KUMAR SAHU
-            </motion.em>
-          </h1>
-
-          <div className="hero-lower">
+        <div className="hero-v2__main">
+          <div className="hero-v2__copy">
             <motion.p
-              className="hero-statement"
-              initial={{ opacity: 0, y: 20 }}
+              className="eyebrow"
+              initial={{ opacity: 0, y: 12 }}
               animate={{ opacity: 1, y: 0 }}
-              transition={{ delay: 0.45, duration: 0.7 }}
+              transition={{ delay: 0.15, duration: 0.55 }}
             >
-              Building intelligent software, AI systems and connected hardware
-              that move ideas <i>beyond the screen.</i>
+              {profile.role}
             </motion.p>
 
-            <motion.div
-              className="current-build"
-              initial={{ opacity: 0 }}
-              animate={{ opacity: 1 }}
-              transition={{ delay: 0.65, duration: 0.7 }}
+            <h1 className="hero-title hero-title-v2" aria-label={profile.name}>
+              <motion.span
+                initial={{ opacity: 0, y: 68 }}
+                animate={{ opacity: 1, y: 0 }}
+                transition={{ delay: 0.05, duration: 0.9, ease: [0.22, 1, 0.36, 1] }}
+              >
+                TARUN
+              </motion.span>
+              <motion.em
+                initial={{ opacity: 0, y: 68 }}
+                animate={{ opacity: 1, y: 0 }}
+                transition={{ delay: 0.14, duration: 0.9, ease: [0.22, 1, 0.36, 1] }}
+              >
+                KUMAR SAHU
+              </motion.em>
+            </h1>
+
+            <motion.p
+              className="hero-v2__manifesto"
+              initial={{ opacity: 0, y: 18 }}
+              animate={{ opacity: 1, y: 0 }}
+              transition={{ delay: 0.48, duration: 0.65 }}
             >
-              <div className="status-line">
-                <span className="status-dot" />
-                CURRENTLY BUILDING
-              </div>
-              <strong>JARVIS OS</strong>
-              <p>Personal AI operating environment</p>
-            </motion.div>
+              I BUILD SYSTEMS THAT
+              <span>THINK, CONNECT AND ACT.</span>
+            </motion.p>
           </div>
+
+          <motion.div
+            className="system-core-shell"
+            data-cursor="EXPLORE"
+            initial={{ opacity: 0, scale: 0.92 }}
+            animate={{ opacity: 1, scale: 1 }}
+            transition={{ delay: 0.35, duration: 0.9, ease: [0.22, 1, 0.36, 1] }}
+            aria-label="System Core visual placeholder"
+          >
+            <div className="system-core-orbit system-core-orbit--one" />
+            <div className="system-core-orbit system-core-orbit--two" />
+            <div className="system-core-orbit system-core-orbit--three" />
+            <div className="system-core-center">
+              <span>CORE</span>
+              <strong>TS</strong>
+              <small>ONLINE</small>
+            </div>
+            <span className="system-node node-a" />
+            <span className="system-node node-b" />
+            <span className="system-node node-c" />
+            <span className="system-node node-d" />
+            <span className="system-node node-e" />
+            <span className="system-core-label label-a">AI</span>
+            <span className="system-core-label label-b">BACKEND</span>
+            <span className="system-core-label label-c">ROBOTICS</span>
+            <span className="system-core-label label-d">IOT</span>
+          </motion.div>
         </div>
 
-        <div className="hero-footer">
-          <div className="hero-tags">
-            <span>AI</span>
-            <span>BACKEND</span>
-            <span>ROBOTICS</span>
-            <span>IoT</span>
+        <div className="hero-footer hero-footer-v2">
+          <div className="current-build current-build-v2">
+            <div className="status-line">
+              <span className="status-dot" />
+              CURRENT SYSTEM
+            </div>
+            <strong>JARVIS OS</strong>
+            <p>Personal AI operating environment</p>
           </div>
 
-          <a className="scroll-cue" href="#about">
-            <span>SCROLL TO EXPLORE</span>
+          <a className="scroll-cue" href="#manifesto" data-cursor="ENTER">
+            <span>SCROLL TO ENTER</span>
             <ArrowDown size={17} strokeWidth={1.4} />
           </a>
         </div>
       </section>
 
+      <section className="manifesto-section" id="manifesto">
+        <div className="manifesto-index">
+          <span>001</span>
+          <span>MANIFESTO</span>
+        </div>
+        <motion.div className="manifesto-copy" {...reveal}>
+          <p>I&apos;M INTERESTED IN THE POINT WHERE</p>
+          <h2>
+            SOFTWARE STOPS BEING
+            <em>just software.</em>
+          </h2>
+          <div className="manifesto-foot">
+            <span>CODE</span>
+            <span>INTELLIGENCE</span>
+            <span>HARDWARE</span>
+            <span>SYSTEMS</span>
+          </div>
+        </motion.div>
+      </section>
+
       <section className="editorial-section about-section" id="about">
         <motion.div className="section-index" {...reveal}>
-          <span>001</span>
+          <span>002</span>
           <span>ABOUT</span>
         </motion.div>
 
@@ -206,23 +166,25 @@ export default function Home() {
                 product experimentation.
               </p>
               <p>
-                The goal is simple: understand the architecture deeply enough
-                to turn ambitious ideas into working, explainable prototypes.
+                The goal is to understand architecture deeply enough to turn
+                ambitious ideas into working, explainable systems.
               </p>
             </div>
           </motion.div>
 
           <motion.div className="education-strip" {...reveal}>
             <span>EDUCATION</span>
-            <strong>B.Tech · Computer Science &amp; Engineering</strong>
-            <span>MIT ADT University · Class of 2029</span>
+            <strong>{profile.education.degree}</strong>
+            <span>
+              {profile.education.institution} · Class of {profile.education.classOf}
+            </span>
           </motion.div>
         </div>
       </section>
 
       <section className="projects-section" id="projects">
         <motion.div className="section-index section-index-light" {...reveal}>
-          <span>002</span>
+          <span>003</span>
           <span>SELECTED SYSTEMS</span>
         </motion.div>
 
@@ -232,9 +194,7 @@ export default function Home() {
               Work in
               <em>motion.</em>
             </h2>
-            <p>
-              Major systems I&apos;m actively building, testing or evolving.
-            </p>
+            <p>Four major systems currently being built, tested or evolved.</p>
           </motion.div>
 
           <div className="project-ledger">
@@ -242,9 +202,10 @@ export default function Home() {
               <motion.a
                 key={project.number}
                 className="project-row"
-                href={project.href}
+                href={project.repo}
                 target="_blank"
                 rel="noreferrer"
+                data-cursor="VIEW"
                 initial={{ opacity: 0, y: 25 }}
                 whileInView={{ opacity: 1, y: 0 }}
                 viewport={{ once: true, amount: 0.25 }}
@@ -279,10 +240,66 @@ export default function Home() {
         </div>
       </section>
 
+      <section className="now-section">
+        <motion.div className="now-heading" {...reveal}>
+          <span>004</span>
+          <h2>NOW</h2>
+          <p>{now.label}</p>
+        </motion.div>
+
+        <div className="now-ledger">
+          {now.items.map(([label, value], index) => (
+            <motion.div
+              className="now-row"
+              key={label}
+              initial={{ opacity: 0, y: 16 }}
+              whileInView={{ opacity: 1, y: 0 }}
+              viewport={{ once: true }}
+              transition={{ delay: index * 0.06, duration: 0.5 }}
+            >
+              <span>{label}</span>
+              <strong>{value}</strong>
+            </motion.div>
+          ))}
+        </div>
+      </section>
+
+      <section className="lab-section" id="lab">
+        <div className="section-index section-index-light">
+          <span>005</span>
+          <span>THE LAB</span>
+        </div>
+
+        <div className="section-body">
+          <motion.div className="lab-heading" {...reveal}>
+            <p>SMALL EXPERIMENTS · STRANGE IDEAS · THINGS BUILT TO LEARN</p>
+            <h2>THE LAB</h2>
+          </motion.div>
+
+          <div className="lab-ledger">
+            {labItems.map(([number, title, meta], index) => (
+              <motion.div
+                className="lab-row"
+                key={title}
+                data-cursor="EXPLORE"
+                initial={{ opacity: 0, y: 18 }}
+                whileInView={{ opacity: 1, y: 0 }}
+                viewport={{ once: true }}
+                transition={{ delay: index * 0.05, duration: 0.55 }}
+              >
+                <span>{number}</span>
+                <h3>{title}</h3>
+                <p>{meta}</p>
+              </motion.div>
+            ))}
+          </div>
+        </div>
+      </section>
+
       <section className="editorial-section stack-section" id="stack">
         <motion.div className="section-index" {...reveal}>
-          <span>003</span>
-          <span>ENGINEERING STACK</span>
+          <span>006</span>
+          <span>ENGINEERING MAP</span>
         </motion.div>
 
         <div className="section-body">
@@ -314,7 +331,7 @@ export default function Home() {
 
       <section className="contact-section" id="contact">
         <motion.div className="contact-kicker" {...reveal}>
-          <span>004</span>
+          <span>007</span>
           <span>OPEN CHANNEL</span>
         </motion.div>
 
@@ -330,20 +347,12 @@ export default function Home() {
           </p>
 
           <div className="contact-links">
-            <a
-              href="https://github.com/thetarunsahu"
-              target="_blank"
-              rel="noreferrer"
-            >
+            <a href={profile.links.github} target="_blank" rel="noreferrer" data-cursor="OPEN">
               <span aria-hidden="true">GH</span>
               GITHUB
               <ArrowUpRight size={15} />
             </a>
-            <a
-              href="https://www.linkedin.com/in/tarunnsahuu/"
-              target="_blank"
-              rel="noreferrer"
-            >
+            <a href={profile.links.linkedin} target="_blank" rel="noreferrer" data-cursor="OPEN">
               <span aria-hidden="true">IN</span>
               LINKEDIN
               <ArrowUpRight size={15} />
@@ -352,7 +361,7 @@ export default function Home() {
         </motion.div>
 
         <div className="site-footer">
-          <span>© 2026 TARUN KUMAR SAHU</span>
+          <span>© 2026 {profile.name.toUpperCase()}</span>
           <span>DESIGNED AS A LIVING SYSTEM</span>
         </div>
       </section>
