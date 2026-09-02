@@ -1,7 +1,7 @@
 import type { Metadata } from "next";
-import { ArrowUpRight } from "lucide-react";
 import { CustomCursor } from "@/components/CustomCursor";
 import { SiteNav } from "@/components/SiteNav";
+import { WorkArchive } from "@/components/WorkArchive";
 import { projects } from "@/data/portfolio";
 
 export const metadata: Metadata = {
@@ -11,11 +11,11 @@ export const metadata: Metadata = {
 
 export default function WorkPage() {
   return (
-    <main className="subpage">
+    <main className="subpage work-page">
       <CustomCursor />
       <SiteNav />
 
-      <section className="subpage-hero">
+      <section className="subpage-hero work-page__hero">
         <div className="subpage-hero__meta">
           <span>WORK / 2026</span>
           <span>SELECTED SYSTEMS · 04</span>
@@ -35,37 +35,14 @@ export default function WorkPage() {
         </div>
       </section>
 
-      <section className="projects-section" aria-label="Selected work">
+      <section className="work-page__archive" aria-label="Selected work">
         <div className="section-index section-index-light">
           <span>001</span>
           <span>ARCHIVE</span>
         </div>
 
         <div className="section-body">
-          <div className="project-ledger">
-            {projects.map((project) => (
-              <a
-                key={project.slug}
-                className="project-row"
-                href={`/work/${project.slug}`}
-                data-cursor="OPEN"
-              >
-                <span className="project-number">{project.number}</span>
-                <div className="project-title-block">
-                  <small>{project.category}</small>
-                  <h3>{project.title}</h3>
-                </div>
-                <p className="project-description">{project.description}</p>
-                <div className="project-meta">
-                  <span>{project.status}</span>
-                  <div className="project-stack">
-                    {project.stack.map((item) => <small key={item}>{item}</small>)}
-                  </div>
-                </div>
-                <ArrowUpRight className="project-arrow" strokeWidth={1.2} />
-              </a>
-            ))}
-          </div>
+          <WorkArchive projects={projects} />
         </div>
       </section>
     </main>
