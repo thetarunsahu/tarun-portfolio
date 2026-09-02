@@ -3,10 +3,12 @@
 import { motion } from "framer-motion";
 import { ArrowDown, ArrowUpRight } from "lucide-react";
 import { CustomCursor } from "@/components/CustomCursor";
+import { HomeProjectShowcase } from "@/components/HomeProjectShowcase";
+import { InteractiveSystemCore } from "@/components/InteractiveSystemCore";
 import { IntroLoader } from "@/components/IntroLoader";
 import { MediaFrame } from "@/components/MediaFrame";
 import { SiteNav } from "@/components/SiteNav";
-import { now, profile, projects, stackGroups } from "@/data/portfolio";
+import { now, profile, stackGroups } from "@/data/portfolio";
 
 const reveal = {
   initial: { opacity: 0, y: 32 },
@@ -29,8 +31,9 @@ export default function Home() {
       <CustomCursor />
       <SiteNav />
 
-      <section className="hero hero-v2" id="top">
+      <section className="hero hero-v2 hero-v3" id="top">
         <div className="hero-grid-lines" aria-hidden="true" />
+        <div className="hero-v3__signal" aria-hidden="true">SYSTEM / 2026</div>
 
         <div className="hero-topline">
           <span>PORTFOLIO / 2026</span>
@@ -38,7 +41,7 @@ export default function Home() {
           <span>{profile.location}</span>
         </div>
 
-        <div className="hero-v2__main">
+        <div className="hero-v2__main hero-v3__main">
           <div className="hero-v2__copy">
             <motion.p
               className="eyebrow"
@@ -77,32 +80,7 @@ export default function Home() {
             </motion.p>
           </div>
 
-          <motion.div
-            className="system-core-shell"
-            data-cursor="EXPLORE"
-            initial={{ opacity: 0, scale: 0.92 }}
-            animate={{ opacity: 1, scale: 1 }}
-            transition={{ delay: 0.35, duration: 0.9, ease: [0.22, 1, 0.36, 1] }}
-            aria-label="System Core visual placeholder"
-          >
-            <div className="system-core-orbit system-core-orbit--one" />
-            <div className="system-core-orbit system-core-orbit--two" />
-            <div className="system-core-orbit system-core-orbit--three" />
-            <div className="system-core-center">
-              <span>CORE</span>
-              <strong>TS</strong>
-              <small>ONLINE</small>
-            </div>
-            <span className="system-node node-a" />
-            <span className="system-node node-b" />
-            <span className="system-node node-c" />
-            <span className="system-node node-d" />
-            <span className="system-node node-e" />
-            <span className="system-core-label label-a">AI</span>
-            <span className="system-core-label label-b">BACKEND</span>
-            <span className="system-core-label label-c">ROBOTICS</span>
-            <span className="system-core-label label-d">IOT</span>
-          </motion.div>
+          <InteractiveSystemCore />
         </div>
 
         <div className="hero-footer hero-footer-v2">
@@ -122,7 +100,7 @@ export default function Home() {
         </div>
       </section>
 
-      <section className="manifesto-section" id="manifesto">
+      <section className="manifesto-section manifesto-section-v2" id="manifesto">
         <div className="manifesto-index">
           <span>001</span>
           <span>MANIFESTO</span>
@@ -130,7 +108,8 @@ export default function Home() {
         <motion.div className="manifesto-copy" {...reveal}>
           <p>I&apos;M INTERESTED IN THE POINT WHERE</p>
           <h2>
-            SOFTWARE STOPS BEING
+            <span>SOFTWARE STOPS</span>
+            <span>BEING</span>
             <em>just software.</em>
           </h2>
           <div className="manifesto-foot">
@@ -202,7 +181,7 @@ export default function Home() {
         </div>
       </section>
 
-      <section className="projects-section" id="projects">
+      <section className="projects-section projects-section-v3" id="projects">
         <motion.div className="section-index section-index-light" {...reveal}>
           <span>003</span>
           <span>SELECTED SYSTEMS</span>
@@ -214,49 +193,10 @@ export default function Home() {
               Work in
               <em>motion.</em>
             </h2>
-            <p>Four major systems currently being built, tested or evolved.</p>
+            <p>Four major systems. Hover to inspect. Open one to enter the case study.</p>
           </motion.div>
 
-          <div className="project-ledger">
-            {projects.map((project, index) => (
-              <motion.a
-                key={project.number}
-                className="project-row"
-                href={project.repo}
-                target="_blank"
-                rel="noreferrer"
-                data-cursor="VIEW"
-                initial={{ opacity: 0, y: 25 }}
-                whileInView={{ opacity: 1, y: 0 }}
-                viewport={{ once: true, amount: 0.25 }}
-                transition={{
-                  delay: index * 0.06,
-                  duration: 0.65,
-                  ease: [0.22, 1, 0.36, 1],
-                }}
-              >
-                <span className="project-number">{project.number}</span>
-
-                <div className="project-title-block">
-                  <small>{project.category}</small>
-                  <h3>{project.title}</h3>
-                </div>
-
-                <p className="project-description">{project.description}</p>
-
-                <div className="project-meta">
-                  <span>{project.status}</span>
-                  <div className="project-stack">
-                    {project.stack.map((item) => (
-                      <small key={item}>{item}</small>
-                    ))}
-                  </div>
-                </div>
-
-                <ArrowUpRight className="project-arrow" strokeWidth={1.2} />
-              </motion.a>
-            ))}
-          </div>
+          <HomeProjectShowcase />
         </div>
       </section>
 
