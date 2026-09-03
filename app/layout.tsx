@@ -10,6 +10,7 @@ import "./polish.css";
 import "./case-study.css";
 import "./navigation.css";
 import "./engineering-map.css";
+import "./case-visual.css";
 
 const geistSans = Geist({
   variable: "--font-geist-sans",
