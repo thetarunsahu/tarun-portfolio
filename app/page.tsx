@@ -3,12 +3,13 @@
 import { motion } from "framer-motion";
 import { ArrowDown, ArrowUpRight } from "lucide-react";
 import { CustomCursor } from "@/components/CustomCursor";
+import { EngineeringMap } from "@/components/EngineeringMap";
 import { HomeProjectShowcase } from "@/components/HomeProjectShowcase";
 import { InteractiveSystemCore } from "@/components/InteractiveSystemCore";
 import { IntroLoader } from "@/components/IntroLoader";
 import { MediaFrame } from "@/components/MediaFrame";
 import { SiteNav } from "@/components/SiteNav";
-import { now, profile, stackGroups } from "@/data/portfolio";
+import { now, profile } from "@/data/portfolio";
 
 const reveal = {
   initial: { opacity: 0, y: 32 },
@@ -311,24 +312,7 @@ export default function Home() {
             <em>meets hardware.</em>
           </motion.h2>
 
-          <div className="stack-grid">
-            {stackGroups.map((group, index) => (
-              <motion.article
-                className="stack-card"
-                key={group.number}
-                initial={{ opacity: 0, y: 25 }}
-                whileInView={{ opacity: 1, y: 0 }}
-                viewport={{ once: true, amount: 0.3 }}
-                transition={{ delay: index * 0.08, duration: 0.6 }}
-              >
-                <div className="stack-card-head">
-                  <span>{group.number}</span>
-                  <p>{group.title}</p>
-                </div>
-                <h3>{group.items.join(" · ")}</h3>
-              </motion.article>
-            ))}
-          </div>
+          <EngineeringMap />
         </div>
       </section>
 
