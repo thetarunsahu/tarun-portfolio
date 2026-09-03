@@ -1,0 +1,42 @@
+.experience-rail {
+  position: fixed;
+  z-index: 80;
+  right: 14px;
+  top: 50%;
+  translate: 0 -50%;
+  height: min(54vh, 430px);
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 10px;
+  pointer-events: none;
+  mix-blend-mode: difference;
+  color: #fff;
+  font-family: var(--font-geist-mono), monospace;
+  font-size: 6px;
+  letter-spacing: .12em;
+}
+
+.experience-rail__track {
+  position: relative;
+  width: 1px;
+  flex: 1;
+  background: rgba(255,255,255,.18);
+  overflow: hidden;
+}
+
+.experience-rail__track i {
+  position: absolute;
+  inset: 0;
+  display: block;
+  background: #fff;
+  transform-origin: top;
+}
+
+@media (max-width: 760px), (pointer: coarse) {
+  .experience-rail { display: none; }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .experience-rail { display: none; }
+}
