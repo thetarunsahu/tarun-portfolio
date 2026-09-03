@@ -6,6 +6,7 @@ import "./media.css";
 import "./pages.css";
 import "./work.css";
 import "./interactions.css";
+import "./polish.css";
 
 const geistSans = Geist({
   variable: "--font-geist-sans",
