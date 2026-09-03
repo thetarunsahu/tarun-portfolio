@@ -1,5 +1,6 @@
 import type { Metadata } from "next";
 import { Geist, Geist_Mono } from "next/font/google";
+import { ExperienceRail } from "@/components/ExperienceRail";
 import "./globals.css";
 import "./experience.css";
 import "./media.css";
@@ -11,6 +12,7 @@ import "./case-study.css";
 import "./navigation.css";
 import "./engineering-map.css";
 import "./case-visual.css";
+import "./rail.css";
 
 const geistSans = Geist({
   variable: "--font-geist-sans",
@@ -44,7 +46,10 @@ export default function RootLayout({ children }: LayoutProps<"/">) {
       lang="en"
       className={`${geistSans.variable} ${geistMono.variable} antialiased`}
     >
-      <body>{children}</body>
+      <body>
+        <ExperienceRail />
+        {children}
+      </body>
     </html>
   );
 }
