@@ -1,55 +1,83 @@
 "use client";
 
+import { AnimatePresence, motion } from "framer-motion";
 import { useState } from "react";
+import { stackGroups } from "@/data/portfolio";
 
-const domains = [
-  { key: "software", label: "SOFTWARE", note: "Backend · APIs · Databases", items: ["JAVA", "BACKEND", "APIs", "SQL", "GIT"] },
-  { key: "ai", label: "AI", note: "Vision · Agents · LLM systems", items: ["VISION", "AGENTS", "LLMs", "PYTHON"] },
-  { key: "hardware", label: "HARDWARE", note: "ESP32 · Sensors · Embedded", items: ["ESP32", "IoT", "SENSORS", "EMBEDDED"] },
-] as const;
+const positions = [
+  { left: "8%", top: "18%" },
+  { left: "70%", top: "14%" },
+  { left: "72%", top: "67%" },
+  { left: "7%", top: "70%" },
+];
 
 export function EngineeringMap() {
-  const [active, setActive] = useState<(typeof domains)[number]["key"]>("software");
-  const current = domains.find((domain) => domain.key === active) ?? domains[0];
+  const [active, setActive] = useState(1);
+  const current = stackGroups[active];
 
   return (
     <div className="engineering-map" data-cursor="EXPLORE">
-      <div className="engineering-map__canvas">
-        <svg className="engineering-map__lines" viewBox="0 0 100 100" aria-hidden="true">
-          <line x1="50" y1="50" x2="17" y2="23" />
-          <line x1="50" y1="50" x2="84" y2="25" />
-          <line x1="50" y1="50" x2="50" y2="84" />
-        </svg>
-
-        <div className="engineering-map__core">
-          <small>SYSTEM</small>
-          <strong>TS</strong>
-          <span>BUILDER</span>
-        </div>
-
-        {domains.map((domain, index) => (
-          <button
-            key={domain.key}
-            type="button"
-            className={`engineering-map__domain engineering-map__domain--${index + 1} ${active === domain.key ? "is-active" : ""}`}
-            onMouseEnter={() => setActive(domain.key)}
-            onFocus={() => setActive(domain.key)}
-            onClick={() => setActive(domain.key)}
-          >
-            <span>{domain.label}</span>
-            <small>{domain.note}</small>
-          </button>
-        ))}
+      <div className="engineering-map__topline">
+        <span>SYSTEM / CAPABILITY MAP</span>
+        <span>HOVER OR TAP A DOMAIN</span>
       </div>
 
-      <div className="engineering-map__readout" aria-live="polite">
-        <div>
-          <span>ACTIVE DOMAIN</span>
-          <strong>{current.label}</strong>
-        </div>
-        <div className="engineering-map__skills">
-          {current.items.map((item) => <span key={item}>{item}</span>)}
-        </div>
+      <div className="engineering-map__canvas">
+        <svg className="engineering-map__lines" viewBox="0 0 100 100" aria-hidden="true">
+          <line x1="50" y1="50" x2="21" y2="28" />
+          <line x1="50" y1="50" x2="76" y2="25" />
+          <line x1="50" y1="50" x2="78" y2="75" />
+          <line x1="50" y1="50" x2="20" y2="77" />
+          <circle cx="50" cy="50" r="34" />
+        </svg>
+
+        <motion.div
+          className="engineering-map__core"
+          animate={{ scale: [1, 1.025, 1] }}
+          transition={{ duration: 4, repeat: Infinity, ease: "easeInOut" }}
+        >
+          <small>BUILDER</small>
+          <strong>TS</strong>
+          <span>SOFTWARE × AI × HARDWARE</span>
+        </motion.div>
+
+        {stackGroups.map((group, index) => (
+          <button
+            key={group.number}
+            type="button"
+            className={`engineering-map__domain ${active === index ? "is-active" : ""}`}
+            style={positions[index]}
+            onMouseEnter={() => setActive(index)}
+            onFocus={() => setActive(index)}
+            onClick={() => setActive(index)}
+          >
+            <span>{group.number}</span>
+            <strong>{group.title}</strong>
+            <i aria-hidden="true" />
+          </button>
+        ))}
+
+        <AnimatePresence mode="wait">
+          <motion.div
+            className="engineering-map__readout"
+            key={current.number}
+            initial={{ opacity: 0, y: 12 }}
+            animate={{ opacity: 1, y: 0 }}
+            exit={{ opacity: 0, y: -8 }}
+            transition={{ duration: 0.26 }}
+            aria-live="polite"
+          >
+            <div>
+              <span>{current.number} / DOMAIN</span>
+              <strong>{current.title}</strong>
+            </div>
+            <div className="engineering-map__skills">
+              {current.items.map((item) => (
+                <span key={item}>{item}</span>
+              ))}
+            </div>
+          </motion.div>
+        </AnimatePresence>
       </div>
     </div>
   );
