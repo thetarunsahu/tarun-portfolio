@@ -1,6 +1,7 @@
 import type { Metadata } from "next";
 import { ArrowLeft, ArrowUpRight } from "lucide-react";
 import { notFound } from "next/navigation";
+import { CaseStudyVisual } from "@/components/CaseStudyVisual";
 import { CustomCursor } from "@/components/CustomCursor";
 import { SiteNav } from "@/components/SiteNav";
 import { caseStudies } from "@/data/caseStudies";
@@ -49,6 +50,8 @@ export default async function ProjectPage({ params }: Props) {
           <span>{project.stack.join(" · ")}</span>
         </div>
       </section>
+
+      <CaseStudyVisual slug={slug} />
 
       <section className="case-study-intent">
         <div className="section-index section-index-light">
