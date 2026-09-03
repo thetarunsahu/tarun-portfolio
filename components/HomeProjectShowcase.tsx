@@ -1,8 +1,14 @@
 "use client";
 
-import { AnimatePresence, motion } from "framer-motion";
+import {
+  AnimatePresence,
+  motion,
+  useMotionValueEvent,
+  useReducedMotion,
+  useScroll,
+} from "framer-motion";
 import { ArrowUpRight } from "lucide-react";
-import { useState } from "react";
+import { useRef, useState } from "react";
 import { projects } from "@/data/portfolio";
 
 function PreviewGraphic({ slug }: { slug: string }) {
@@ -59,57 +65,118 @@ function PreviewGraphic({ slug }: { slug: string }) {
 }
 
 export function HomeProjectShowcase() {
-  const [active, setActive] = useState(projects[0]);
+  const rootRef = useRef<HTMLDivElement>(null);
+  const reducedMotion = useReducedMotion();
+  const [activeIndex, setActiveIndex] = useState(0);
+  const active = projects[activeIndex];
+
+  const { scrollYProgress } = useScroll({
+    target: rootRef,
+    offset: ["start start", "end end"],
+  });
+
+  useMotionValueEvent(scrollYProgress, "change", (value) => {
+    if (reducedMotion) return;
+    const next = Math.min(projects.length - 1, Math.floor(value * projects.length));
+    setActiveIndex((current) => (current === next ? current : next));
+  });
+
+  function jumpTo(index: number) {
+    const root = rootRef.current;
+    if (!root) return;
+
+    const rect = root.getBoundingClientRect();
+    const top = window.scrollY + rect.top;
+    const scrollable = root.offsetHeight - window.innerHeight;
+    const destination = top + scrollable * (index / (projects.length - 1));
+
+    window.scrollTo({
+      top: destination,
+      behavior: reducedMotion ? "auto" : "smooth",
+    });
+  }
 
   return (
-    <div className="home-project-showcase">
-      <div className="home-project-showcase__ledger">
-        {projects.map((project, index) => (
-          <motion.a
-            key={project.slug}
-            href={`/work/${project.slug}`}
-            className={`home-project-row ${active.slug === project.slug ? "home-project-row--active" : ""}`}
-            data-cursor="OPEN"
-            onMouseEnter={() => setActive(project)}
-            onFocus={() => setActive(project)}
-            initial={{ opacity: 0, y: 24 }}
-            whileInView={{ opacity: 1, y: 0 }}
-            viewport={{ once: true, amount: 0.25 }}
-            transition={{ delay: index * 0.06, duration: 0.62, ease: [0.22, 1, 0.36, 1] }}
-          >
-            <span className="home-project-row__number">{project.number}</span>
-            <div className="home-project-row__title">
-              <small>{project.category}</small>
-              <h3>{project.title}</h3>
-            </div>
-            <span className="home-project-row__status">{project.status}</span>
-            <ArrowUpRight size={22} strokeWidth={1.2} />
-          </motion.a>
-        ))}
-      </div>
+    <div className="scroll-work" ref={rootRef}>
+      <div className="scroll-work__sticky">
+        <div className="scroll-work__topline">
+          <span>SCROLL TO INSPECT</span>
+          <span>{String(activeIndex + 1).padStart(2, "0")} / 04</span>
+        </div>
 
-      <div className="home-project-showcase__preview" aria-live="polite">
-        <AnimatePresence mode="wait">
-          <motion.div
-            key={active.slug}
-            className={`home-project-preview home-project-preview--${active.slug}`}
-            initial={{ opacity: 0, scale: 0.96, y: 18 }}
-            animate={{ opacity: 1, scale: 1, y: 0 }}
-            exit={{ opacity: 0, scale: 1.02, y: -12 }}
-            transition={{ duration: 0.36, ease: [0.22, 1, 0.36, 1] }}
-          >
-            <div className="home-project-preview__meta">
-              <span>{active.number} / SYSTEM</span>
-              <span>{active.status}</span>
-            </div>
-            <PreviewGraphic slug={active.slug} />
-            <div className="home-project-preview__copy">
-              <h4>{active.title}</h4>
-              <p>{active.description}</p>
-              <span>OPEN CASE STUDY ↗</span>
-            </div>
-          </motion.div>
-        </AnimatePresence>
+        <div className="scroll-work__stage">
+          <div className="scroll-work__copy">
+            <AnimatePresence mode="wait">
+              <motion.div
+                key={active.slug}
+                initial={{ opacity: 0, y: 34, filter: "blur(8px)" }}
+                animate={{ opacity: 1, y: 0, filter: "blur(0px)" }}
+                exit={{ opacity: 0, y: -28, filter: "blur(8px)" }}
+                transition={{ duration: 0.48, ease: [0.22, 1, 0.36, 1] }}
+              >
+                <span className="scroll-work__category">{active.category}</span>
+                <h3>{active.title}</h3>
+                <p>{active.description}</p>
+
+                <div className="scroll-work__stack">
+                  {active.stack.map((item) => (
+                    <span key={item}>{item}</span>
+                  ))}
+                </div>
+
+                <a href={`/work/${active.slug}`} data-cursor="OPEN">
+                  ENTER CASE STUDY <ArrowUpRight size={17} strokeWidth={1.35} />
+                </a>
+              </motion.div>
+            </AnimatePresence>
+          </div>
+
+          <div className="scroll-work__visual" aria-live="polite">
+            <AnimatePresence mode="wait">
+              <motion.div
+                key={active.slug}
+                className={`scroll-work__visual-card scroll-work__visual-card--${active.slug}`}
+                initial={{ opacity: 0, scale: 0.92, rotate: -1.5 }}
+                animate={{ opacity: 1, scale: 1, rotate: 0 }}
+                exit={{ opacity: 0, scale: 1.04, rotate: 1.5 }}
+                transition={{ duration: 0.52, ease: [0.22, 1, 0.36, 1] }}
+              >
+                <div className="scroll-work__visual-meta">
+                  <span>{active.number} / SYSTEM</span>
+                  <span>{active.status}</span>
+                </div>
+                <PreviewGraphic slug={active.slug} />
+                <div className="scroll-work__visual-caption">
+                  <span>LIVE SYSTEM PREVIEW</span>
+                  <strong>{active.title}</strong>
+                </div>
+              </motion.div>
+            </AnimatePresence>
+          </div>
+        </div>
+
+        <div className="scroll-work__chapters" aria-label="Project chapters">
+          {projects.map((project, index) => (
+            <button
+              key={project.slug}
+              type="button"
+              className={index === activeIndex ? "is-active" : ""}
+              onClick={() => jumpTo(index)}
+              onMouseEnter={() => reducedMotion && setActiveIndex(index)}
+              onFocus={() => reducedMotion && setActiveIndex(index)}
+            >
+              <span>{project.number}</span>
+              <strong>{project.title}</strong>
+              <i aria-hidden="true" />
+            </button>
+          ))}
+        </div>
+
+        <motion.div
+          className="scroll-work__progress"
+          style={{ scaleX: scrollYProgress }}
+          aria-hidden="true"
+        />
       </div>
     </div>
   );
