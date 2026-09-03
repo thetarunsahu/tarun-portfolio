@@ -13,6 +13,7 @@ import "./navigation.css";
 import "./engineering-map.css";
 import "./case-visual.css";
 import "./rail.css";
+import "./scroll-showcase.css";
 
 const geistSans = Geist({
   variable: "--font-geist-sans",
