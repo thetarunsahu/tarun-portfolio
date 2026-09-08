@@ -21,6 +21,7 @@ import "./the-tarun.css";
 import "./about-portrait.css";
 import "./process-photo.css";
 import "./lab-photo.css";
+import "./lab-page-final.css";
 
 const geistSans = Geist({
   variable: "--font-geist-sans",
