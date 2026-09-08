@@ -16,6 +16,7 @@ import "./rail.css";
 import "./scroll-showcase.css";
 import "./identity-motion.css";
 import "./final-home.css";
+import "./mobile-menu.css";
 
 const geistSans = Geist({
   variable: "--font-geist-sans",
