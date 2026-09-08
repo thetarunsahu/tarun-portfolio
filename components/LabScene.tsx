@@ -47,18 +47,24 @@ export function LabScene() {
           ))}
         </div>
 
-        <div className="lab-scene__preview" aria-live="polite">
+        <div className="lab-scene__preview lab-photo-stage" aria-live="polite">
+          <div className="lab-photo-stage__portrait" aria-hidden="true" />
+          <div className="lab-photo-stage__scribble" aria-hidden="true">
+            <span>TRY</span><span>BREAK</span><span>LEARN</span><span>REPEAT</span>
+          </div>
           <AnimatePresence mode="wait">
             <motion.div
               key={current.number}
-              className="lab-scene__preview-card"
+              className={`lab-scene__preview-card lab-photo-card lab-photo-card--${active + 1}`}
               initial={{ opacity: 0, rotate: -2, scale: 0.96, y: 20 }}
               animate={{ opacity: 1, rotate: 0, scale: 1, y: 0 }}
               exit={{ opacity: 0, rotate: 2, scale: 1.03, y: -16 }}
               transition={{ duration: 0.38, ease: [0.22, 1, 0.36, 1] }}
             >
               <div className="lab-scene__preview-no">{current.number}</div>
-              <div className="lab-scene__preview-lines" aria-hidden="true"><i /><i /><i /><i /></div>
+              <div className="lab-photo-card__window" aria-hidden="true">
+                <i /><i /><i />
+              </div>
               <div className="lab-scene__preview-copy">
                 <span>EXPERIMENT / {current.meta}</span>
                 <h3>{current.title}</h3>
