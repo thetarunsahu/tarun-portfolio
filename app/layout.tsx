@@ -18,6 +18,7 @@ import "./identity-motion.css";
 import "./final-home.css";
 import "./mobile-menu.css";
 import "./the-tarun.css";
+import "./about-portrait.css";
 
 const geistSans = Geist({
   variable: "--font-geist-sans",
