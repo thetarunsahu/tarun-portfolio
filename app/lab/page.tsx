@@ -1,6 +1,5 @@
 import type { Metadata } from "next";
 import { CustomCursor } from "@/components/CustomCursor";
-import { MediaFrame } from "@/components/MediaFrame";
 import { SiteNav } from "@/components/SiteNav";
 
 export const metadata: Metadata = {
@@ -20,11 +19,11 @@ const labItems = [
 
 export default function LabPage() {
   return (
-    <main className="subpage lab-page">
+    <main className="subpage lab-page lab-page--final">
       <CustomCursor />
       <SiteNav />
 
-      <section className="subpage-hero">
+      <section className="subpage-hero lab-page-hero">
         <div className="subpage-hero__meta">
           <span>LAB / ACTIVE ARCHIVE</span>
           <span>EXPERIMENTS · PROTOTYPES · STUDIES</span>
@@ -48,10 +47,13 @@ export default function LabPage() {
         </div>
       </section>
 
-      <section className="lab-page-stage">
+      <section className="lab-page-stage lab-page-stage--photo">
         <div className="lab-page-stage__copy">
           <span>01 / CREATIVE PROCESS</span>
-          <h2>Learning can look strange.</h2>
+          <h2>
+            LEARNING CAN
+            <em>look strange.</em>
+          </h2>
           <p>
             The Lab is intentionally less polished than Work. It holds tests,
             prototypes, visual experiments and ideas that helped me learn a new
@@ -59,30 +61,27 @@ export default function LabPage() {
           </p>
         </div>
 
-        <div className="lab-page-stage__media">
-          <MediaFrame
-            src="/media/lab-focus.webp"
-            index="STUDY 01"
-            label="FOCUS / CREATE / REPEAT"
-            caption="A playful self-study used here because the Lab is where experimentation is allowed to feel personal."
-            cursor="EXPLORE"
-          />
-          <MediaFrame
-            src="/media/lab-ai.webp"
-            index="STUDY 02"
-            label="AI / VISUAL EXPLORATION"
-            caption="A generative visual study placed with creative experiments rather than presented as a real engineering result."
-            cursor="EXPLORE"
-          />
+        <div className="lab-page-art" data-cursor="EXPLORE">
+          <div className="lab-page-art__photo" role="img" aria-label="Creative portrait of Tarun" />
+          <div className="lab-page-art__slice lab-page-art__slice--one" aria-hidden="true" />
+          <div className="lab-page-art__slice lab-page-art__slice--two" aria-hidden="true" />
+          <div className="lab-page-art__note lab-page-art__note--a">TRY / BREAK / LEARN</div>
+          <div className="lab-page-art__note lab-page-art__note--b">NOT EVERYTHING NEEDS A ROADMAP.</div>
+          <div className="lab-page-art__stamp">EXPERIMENT / 01</div>
         </div>
       </section>
 
-      <section className="lab-page-ledger">
+      <section className="lab-page-ledger lab-page-ledger--final">
+        <div className="lab-page-ledger__intro">
+          <span>02 / OPEN DRAWER</span>
+          <p>Each item is a test of an input, an idea, a system or a way of seeing.</p>
+        </div>
         {labItems.map(([number, title, meta]) => (
           <div className="lab-page-ledger__row" key={title} data-cursor="EXPLORE">
             <span>{number}</span>
             <h3>{title}</h3>
             <p>{meta}</p>
+            <i aria-hidden="true">↗</i>
           </div>
         ))}
       </section>
