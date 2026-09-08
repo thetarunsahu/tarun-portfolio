@@ -17,6 +17,7 @@ import "./scroll-showcase.css";
 import "./identity-motion.css";
 import "./final-home.css";
 import "./mobile-menu.css";
+import "./the-tarun.css";
 
 const geistSans = Geist({
   variable: "--font-geist-sans",
