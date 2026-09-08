@@ -2,7 +2,6 @@
 
 import { motion, useReducedMotion, useScroll, useTransform } from "framer-motion";
 import { useRef } from "react";
-import { MediaFrame } from "@/components/MediaFrame";
 
 const layers = [
   ["01", "SOFTWARE", "BACKEND · APIs · DATABASES"],
@@ -22,6 +21,7 @@ export function AboutScene() {
   const mediaY = useTransform(scrollYProgress, [0, 1], [70, -70]);
   const textY = useTransform(scrollYProgress, [0.1, 0.8], [42, -20]);
   const trackX = useTransform(scrollYProgress, [0, 1], ["0%", "-14%"]);
+  const portraitScale = useTransform(scrollYProgress, [0, .5, 1], [1.08, 1, 1.06]);
 
   return (
     <section ref={ref} className="about-scene" id="about">
@@ -32,14 +32,22 @@ export function AboutScene() {
 
       <div className="about-scene__stage">
         <motion.div className="about-scene__media" style={reducedMotion ? undefined : { y: mediaY }}>
-          <MediaFrame
-            src="/media/tarun-sunglasses.webp"
-            index="FRAME 01"
-            label="IDENTITY / EDITORIAL"
-            caption="The person is visible. The role is intentionally harder to reduce to one label."
-            className="media-frame--identity"
-            cursor="LOOK"
-          />
+          <div className="about-portrait-art" data-cursor="LOOK">
+            <motion.div
+              className="about-portrait-art__image"
+              style={reducedMotion ? undefined : { scale: portraitScale }}
+              aria-label="Portrait of Tarun"
+              role="img"
+            />
+            <div className="about-portrait-art__veil" aria-hidden="true" />
+            <div className="about-portrait-art__index">
+              <span>FRAME / 02</span>
+              <strong>VISIBLE PERSON.<br />UNRESOLVED ROLE.</strong>
+            </div>
+            <div className="about-portrait-art__axis" aria-hidden="true">
+              <i /><i /><i /><i />
+            </div>
+          </div>
         </motion.div>
 
         <motion.div className="about-scene__copy" style={reducedMotion ? undefined : { y: textY }}>
