@@ -2,6 +2,7 @@
 
 import { useState } from "react";
 import { ArrowUpRight } from "lucide-react";
+import { ProjectSignalVisual } from "@/components/ProjectSignalVisual";
 import type { Project } from "@/data/portfolio";
 
 export function WorkArchive({ projects }: { projects: Project[] }) {
@@ -39,12 +40,7 @@ export function WorkArchive({ projects }: { projects: Project[] }) {
           </div>
 
           <div className={`work-preview__visual work-preview__visual--${active.slug}`} aria-hidden="true">
-            <div className="work-preview__ring work-preview__ring--one" />
-            <div className="work-preview__ring work-preview__ring--two" />
-            <div className="work-preview__core">{active.number}</div>
-            <span className="work-preview__node work-preview__node--a" />
-            <span className="work-preview__node work-preview__node--b" />
-            <span className="work-preview__node work-preview__node--c" />
+            <ProjectSignalVisual slug={active.slug} />
           </div>
 
           <div className="work-preview__copy">
