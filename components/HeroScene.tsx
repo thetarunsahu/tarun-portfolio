@@ -3,7 +3,7 @@
 import { motion, useReducedMotion, useScroll, useTransform } from "framer-motion";
 import { ArrowDown } from "lucide-react";
 import { useRef } from "react";
-import { InteractiveSystemCore } from "@/components/InteractiveSystemCore";
+import { TheTarunArtifact } from "@/components/TheTarunArtifact";
 import { profile } from "@/data/portfolio";
 
 export function HeroScene() {
@@ -17,13 +17,15 @@ export function HeroScene() {
   const titleY = useTransform(scrollYProgress, [0, 0.72, 1], [0, -26, -74]);
   const titleScale = useTransform(scrollYProgress, [0, 0.72, 1], [1, 0.98, 0.92]);
   const titleOpacity = useTransform(scrollYProgress, [0, 0.84, 1], [1, 1, 0]);
-  const coreScale = useTransform(scrollYProgress, [0, 0.68, 1], [1, 1.04, 0.82]);
-  const coreX = useTransform(scrollYProgress, [0, 1], [0, 44]);
+  const artifactScale = useTransform(scrollYProgress, [0, 0.68, 1], [1, 1.035, 0.86]);
+  const artifactX = useTransform(scrollYProgress, [0, 1], [0, 54]);
+  const artifactY = useTransform(scrollYProgress, [0, 0.72, 1], [0, -8, 42]);
   const footerOpacity = useTransform(scrollYProgress, [0, 0.35, 0.72], [1, 1, 0]);
   const gridOpacity = useTransform(scrollYProgress, [0, 1], [0.34, 0.08]);
+  const questionX = useTransform(scrollYProgress, [0, 1], [0, -42]);
 
   return (
-    <section ref={ref} className="home-hero" id="top">
+    <section ref={ref} className="home-hero home-hero--entity" id="top">
       <div className="home-hero__sticky">
         <motion.div
           className="hero-grid-lines"
@@ -78,13 +80,21 @@ export function HeroScene() {
               I BUILD SYSTEMS THAT
               <span>THINK, CONNECT AND ACT.</span>
             </motion.p>
+
+            <motion.div
+              className="home-hero__identity-question"
+              style={reducedMotion ? undefined : { x: questionX }}
+            >
+              <span>THE TARUN / 01</span>
+              <p>PROGRAMMER? ENGINEER? AI BUILDER? SOMETHING BETWEEN THE LAYERS.</p>
+            </motion.div>
           </motion.div>
 
           <motion.div
-            className="home-hero__core"
-            style={reducedMotion ? undefined : { scale: coreScale, x: coreX }}
+            className="home-hero__core home-hero__artifact-wrap"
+            style={reducedMotion ? undefined : { scale: artifactScale, x: artifactX, y: artifactY }}
           >
-            <InteractiveSystemCore />
+            <TheTarunArtifact />
           </motion.div>
         </div>
 
