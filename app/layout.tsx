@@ -19,6 +19,7 @@ import "./final-home.css";
 import "./mobile-menu.css";
 import "./the-tarun.css";
 import "./about-portrait.css";
+import "./process-photo.css";
 
 const geistSans = Geist({
   variable: "--font-geist-sans",
